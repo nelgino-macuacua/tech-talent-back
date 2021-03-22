@@ -18,12 +18,17 @@ class User extends Model
         'github',
         'linkedin',
         'portifolio',
-        'skills'
+        'skills',
+        'imagem'
     ];
 
     public function skills()
     {
         return $this->belongsToMany(Skill::class, 'user_skills');
+    }
+    public function titulos()
+    {
+        return $this->belongsToMany(Titulo::class, 'user_titulos');
     }
 
 

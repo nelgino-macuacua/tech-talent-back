@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Skill;
 use App\Http\Controllers\UserSkillController;
+use Exception;
 
 class SkillController extends Controller
 {
@@ -38,7 +39,7 @@ class SkillController extends Controller
     }
 
 
-    public function store(array $skills, $idUser)
+    public function store(array $skills, array $titulos, $idUser)
     {
 
         $skillsId=[];
@@ -50,7 +51,11 @@ class SkillController extends Controller
             })->get();
 
             if($resultado->isEmpty()){
-                $skill->save();
+                try{
+                    $skill->save();
+                }catch(Exception $e){
+                    return "Erro na insercao do skill";
+                }
                 $skillsId[$i]=$skill->getAttributes()['id'];
             }else{
                 for($j=0;$j<count($resultado);$j++) {
@@ -60,7 +65,7 @@ class SkillController extends Controller
 
         }
         $userSkill=new UserSkillController();
-        $userSkill->store($skillsId, $idUser);
+        $userSkill->store($skillsId, $idUser, $titulos);
 
     }
 

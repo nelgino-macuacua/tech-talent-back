@@ -18,12 +18,12 @@ class CreateUsersTable extends Migration
             $table->string('nome');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('titulo');
             $table->integer('taxa');
-            $table->string('disponibilidade'); 
+            $table->string('disponibilidade');
             $table->string('github')->unique();
             $table->string('linkedin')->unique();
             $table->string('portifolio')->unique();
+            $table->string('imagem');
             $table->timestamps();
         });
     }

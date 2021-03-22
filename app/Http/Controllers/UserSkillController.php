@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\UserSkill;
 use Illuminate\Http\Request;
+use App\Http\Controllers\TituloController;
 
 
 class UserSkillController extends Controller
@@ -34,7 +35,7 @@ class UserSkillController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(array $skillsId, $userId)
+    public function store(array $skillsId, $userId, $titulos)
     {
         for($i=0;$i<count($skillsId);$i++){
             $userSkill=new UserSkill();
@@ -42,6 +43,9 @@ class UserSkillController extends Controller
             $userSkill->skill_id=$skillsId[$i];
             $userSkill->save();
         }
+
+        $userTitulo=new TituloController();
+        $userTitulo->store($titulos, $userId);
     }
 
     /**
